@@ -14,4 +14,5 @@
 
 </body>
 </html>
-<script src=""
+<script type="text/javascript" src="${projectPath}/source/js/jquery/jquery-3.2.1.min.js"></script>
+<script src="${projectPath}/source/js/pagejs/websocket.js"></script>
