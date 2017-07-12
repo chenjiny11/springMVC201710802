@@ -1,6 +1,9 @@
 package com.springapp.mvc;
 
+import com.alibaba.fastjson.JSONObject;
+import com.springapp.mvc.util.PropertiesRead;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +24,14 @@ public class HelloController {
 		model.addAttribute("message", "Hello world!");
 
 		return "hello";
+	}
+
+	@RequestMapping(value = "/vueTest")
+	public String vueTest(Model model) {
+		model.addAttribute("projectPath", PropertiesRead.getString("spring_mvc_path"));
+		model.addAttribute("vueValue", "vueValue");
+
+		return "vueTest";
 	}
 
 
