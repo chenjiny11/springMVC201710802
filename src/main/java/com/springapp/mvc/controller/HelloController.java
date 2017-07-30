@@ -1,14 +1,18 @@
-package com.springapp.mvc;
+package com.springapp.mvc.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.springapp.mvc.util.PropertiesRead;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,8 +23,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class HelloController {
+
+	private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
+
 	@RequestMapping(value = "/printWelcome",method = RequestMethod.GET)
-	public String printWelcome(ModelMap model, HttpServletResponse httpServletResponse) throws IOException {
+	public String printWelcome(ModelMap model, HttpServletRequest request) throws IOException {
+		HttpSession session = request.getSession();
+		//TODO 后期此处应该放在刚打开会话时添加属性
+		session.setAttribute("projectPath", PropertiesRead.getString("spring_mvc_path"));
+		logger.info("printWelcome logger!");
 		model.addAttribute("message", "Hello world!");
 
 		return "hello";
@@ -28,10 +39,14 @@ public class HelloController {
 
 	@RequestMapping(value = "/vueTest")
 	public String vueTest(Model model) {
-		model.addAttribute("projectPath", PropertiesRead.getString("spring_mvc_path"));
 		model.addAttribute("vueValue", "vueValue");
 
 		return "vueTest";
+	}
+	@RequestMapping(value = "/websocketTest")
+	public String websocketTest(Model model) {
+		model.addAttribute("vueValue", "vueValue");
+		return "websocket";
 	}
 
 

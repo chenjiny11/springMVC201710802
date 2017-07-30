@@ -11,7 +11,9 @@
     <title></title>
 </head>
 <body>
-
+  <div id="text">这是一个测试</div>
+  <div id="message"></div>
+  <div id="clickMe">点击我</div>
 </body>
 </html>
 <script type="text/javascript" src="${projectPath}/source/js/jquery/jquery-3.2.1.min.js"></script>
